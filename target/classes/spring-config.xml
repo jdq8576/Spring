@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop   http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <context:annotation-config></context:annotation-config>
+
+    <bean id="student" class="cn.edu.njtech.entity.Student">
+        <property name="name" value="Tim"></property>
+    </bean>
+
+    <bean id="stu,stu1,stu2" class="cn.edu.njtech.entity.Student">
+        <property name="name" value="Jerry"></property>
+    </bean>
+
+    <alias name="stu" alias="student2"></alias>
+
+
+    <bean id="teacher" class="cn.edu.njtech.entity.Teacher">
+    </bean>
+
+    <bean id="userService" class="cn.edu.njtech.service.impl.UserServiceImpl"></bean>
+
+    <bean id="before" class="cn.edu.njtech.proxy.Before"></bean>
+
+    <bean id="factoryBeanStudent" class="cn.edu.njtech.factorybean.MyFactoryBean">
+        <property name="student" ref="student"></property>
+    </bean>
+
+    <aop:config>
+        <aop:pointcut id="pc" expression="execution(* login(..))"></aop:pointcut>
+        <aop:advisor advice-ref="before" pointcut-ref="pc"></aop:advisor>
+    </aop:config>
+
+
+</beans>
